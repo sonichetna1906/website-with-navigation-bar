@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stylish Navigation Menu</title>
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Navigation Styles */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 0;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      transition: all 0.4s ease;
+      z-index: 999;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    nav.scrolled {
+      background: linear-gradient(to right, #ff512f, #dd2476);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 25px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 6px 12px;
+    }
+
+    nav ul li a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      color: #ffeb3b;
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 20px;
+      height: 100vh;
+    }
+
+    .section1 { background-color: #fceabb; }
+    .section2 { background-color: #f8b500; }
+    .section3 { background-color: #00c9ff; }
+    .section4 { background-color: #a1ffce; }
+
+    h2 {
+      font-size: 36px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 18px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Sections -->
+  <section class="section1" id="home">
+    <h2>Welcome to Our Website</h2>
+    <p>Scroll down to see the menu style change with a gradient effect.</p>
+  </section>
+
+  <section class="section2" id="about">
+    <h2>About Us</h2>
+    <p>We build interactive, responsive, and attractive web interfaces.</p>
+  </section>
+
+  <section class="section3" id="services">
+    <h2>Our Services</h2>
+    <p>Website development, UI/UX design, and digital solutions.</p>
+  </section>
+
+  <section class="section4" id="contact">
+    <h2>Contact Us</h2>
+    <p>Email us at contact@example.com or call 123-456-7890.</p>
+  </section>
+
+  <!-- JavaScript for scroll effect -->
+  <script>
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
+</body>
+</html>
