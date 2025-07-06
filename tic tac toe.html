@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic Tac Toe</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    #game {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 10px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .cell:hover {
+      background-color: #f0f0f0;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #444;
+    }
+
+    #resetBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #ff6f61;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #resetBtn:hover {
+      background-color: #ff3b2e;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tic Tac Toe</h1>
+  <div id="game">
+    <!-- 9 Cells -->
+    <div class="cell" onclick="makeMove(this, 0)"></div>
+    <div class="cell" onclick="makeMove(this, 1)"></div>
+    <div class="cell" onclick="makeMove(this, 2)"></div>
+    <div class="cell" onclick="makeMove(this, 3)"></div>
+    <div class="cell" onclick="makeMove(this, 4)"></div>
+    <div class="cell" onclick="makeMove(this, 5)"></div>
+    <div class="cell" onclick="makeMove(this, 6)"></div>
+    <div class="cell" onclick="makeMove(this, 7)"></div>
+    <div class="cell" onclick="makeMove(this, 8)"></div>
+  </div>
+
+  <div id="status">Player X's turn</div>
+  <button id="resetBtn" onclick="resetGame()">Reset Game</button>
+
+  <script>
+    let board = Array(9).fill('');
+    let currentPlayer = 'X';
+    let gameActive = true;
+
+    const winConditions = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // cols
+      [0, 4, 8], [2, 4, 6]             // diagonals
+    ];
+
+    function makeMove(cell, index) {
+      if (!gameActive || board[index] !== '') return;
+
+      board[index] = currentPlayer;
+      cell.textContent = currentPlayer;
+
+      if (checkWin()) {
+        document.getElementById('status').textContent = `Player ${currentPlayer} wins!`;
+        gameActive = false;
+        return;
+      }
+
+      if (board.every(cell => cell !== '')) {
+        document.getElementById('status').textContent = `It's a tie!`;
+        gameActive = false;
+        return;
+      }
+
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      document.getElementById('status').textContent = `Player ${currentPlayer}'s turn`;
+    }
+
+    function checkWin() {
+      return winConditions.some(condition => {
+        const [a, b, c] = condition;
+        return board[a] && board[a] === board[b] && board[b] === board[c];
+      });
+    }
+
+    function resetGame() {
+      board = Array(9).fill('');
+      currentPlayer = 'X';
+      gameActive = true;
+      document.querySelectorAll('.cell').forEach(cell => cell.textContent = '');
+      document.getElementById('status').textContent = "Player X's turn";
+    }
+  </script>
+</body>
+</html>
